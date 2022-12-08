@@ -1,0 +1,34 @@
+<mat-card>
+  <h1><strong>New Year Collection</strong></h1>
+  <h2>Choose your category</h2>
+  <mat-card-content>
+    <mat-selection-list role="list" fxLayout="row" [multiple]="false">
+      <mat-list-option role="listoption" *ngFor="let item of categories$ | async" [value]="item"
+                       (click)="onSelectCategory(item)">
+        {{item}}
+      </mat-list-option>
+    </mat-selection-list>
+
+    <p [ngStyle]="{fontSize: '20px', cursor: 'pointer'}" (click)="sortByPrice(priceSorting$)"
+       *ngIf="priceSorting$ | async as priceSorting$ ">Sort by Price
+      <span class="material-symbols-outlined">
+unfold_more
+</span></p>
+
+    <h3>Clothes</h3>
+    <mat-list role="list">
+      <mat-list-item role="listitem" *ngFor="let item of products$ | async">
+        <img [ngStyle]="{width: '40px'}" src="{{item.image}}" alt="">
+        <div>
+          {{item.title}}
+          {{item.price}}
+          <button mat-button color="primary" (click)="removeProduct(item.id)">Remove</button>
+        </div>
+
+      </mat-list-item>
+    </mat-list>
+
+  </mat-card-content>
+
+
+</mat-card>
