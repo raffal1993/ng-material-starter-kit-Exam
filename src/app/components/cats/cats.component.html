@@ -1,0 +1,64 @@
+<mat-card>
+  <mat-card-title>Form</mat-card-title>
+  <mat-card-content>
+    <form [formGroup]="searchCats">
+      <div>
+        <mat-form-field appearance="fill">
+          <mat-label>City Name</mat-label>
+          <input type="text"
+                 placeholder="City Name"
+                 matInput
+                 formControlName="cityName"
+                 [matAutocomplete]="cityNames">
+          <mat-autocomplete #cityNames="matAutocomplete">
+            <mat-option *ngFor="let item of cities$ | async" [value]="item.name">
+              {{item.name}}
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field appearance="fill">
+          <mat-label>Price</mat-label>
+          <input type="text"
+                 placeholder="Pick one"
+                 matInput
+                 formControlName="price"
+                 [matAutocomplete]="catPrices">
+          <mat-autocomplete #catPrices="matAutocomplete">
+            <mat-option *ngFor="let item of catPrices$ | async" [value]="item">
+              {{item}}
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field appearance="fill">
+          <mat-label>Search Term</mat-label>
+          <input matInput type="text" placeholder="Search Term" formControlName="searchTerm" required>
+          <mat-error *ngIf="searchCats.get('searchTerm')!.invalid">searchTerm is invalid</mat-error>
+        </mat-form-field>
+
+      </div>
+
+
+    </form>
+  </mat-card-content>
+</mat-card>
+
+<mat-card>
+  <mat-card-title>Cats</mat-card-title>
+  <mat-card-content>
+
+    <mat-chip-list aria-label="Cats">
+      <mat-chip *ngFor="let item of filteredCats$ | async">
+        {{item.breed}} from {{item.cityName}} for {{item.price}}
+      </mat-chip>
+    </mat-chip-list>
+  </mat-card-content>
+</mat-card>
+
+
+
+
+
