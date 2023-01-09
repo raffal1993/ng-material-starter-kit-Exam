@@ -1,0 +1,34 @@
+<mat-card
+  ><mat-card-title>Countries</mat-card-title
+  ><mat-card-content>
+    <ng-container *ngIf="params$ | async as params">
+      <button
+        (click)="onPageSizeChange(item)"
+        [disabled]="params['pageSize'] == item"
+        *ngFor="let item of pageSizeOptions$ | async"
+        mat-raised-button
+      >
+        {{ item }}
+      </button>
+    </ng-container>
+    <br />
+    <mat-chip-list>
+      <mat-chip *ngFor="let item of filteredCountries$ | async">
+        {{ item.id }} :
+        {{ item.name }}
+      </mat-chip>
+    </mat-chip-list>
+    <br />
+    <ng-container *ngIf="params$ | async as params">
+      <button
+        [ngClass]="'button'"
+        [disabled]="params['pageNumber'] == item"
+        (click)="onPageNumberChange(item)"
+        *ngFor="let item of pages$ | async"
+        mat-raised-button
+      >
+        {{ item }}
+      </button>
+    </ng-container>
+  </mat-card-content></mat-card
+>
