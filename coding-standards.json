@@ -41,6 +41,10 @@
     },
     "service": {
       "type": "ANGULAR_SERVICE"
+    },
+    "query-model": {
+      "type": "DATA_STRUCTURE",
+      "folder": "query-models"
     }
   }
 }
